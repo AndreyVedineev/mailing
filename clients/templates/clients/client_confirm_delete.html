@@ -1,0 +1,14 @@
+{% extends 'posting/base.html' %}
+{% block content %}
+    <div class="center">
+        <form method="post" class="card p-3 px-md-4 mb-3 ">
+            {% csrf_token %}
+            <h2>Удаление клиента</h2>
+            <p>Вы действительно хотите удалить клиента? {{ object.full_name }}?</p>
+            <p class="form-buttons mb-7">
+                <input type="submit" class="btn btn-primary p-2 me-2" value="Удалить">
+                <a href="{% url 'clients:clients_list' %}" class="btn btn-warning p-2 me-2">Отмена</a>
+            </p>
+        </form>
+    </div>
+{% endblock %}

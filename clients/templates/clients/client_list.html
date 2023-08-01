@@ -4,34 +4,29 @@
 {% block content %}
 
     <main>
-
         <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
             {% for object in object_list %}
                 <div class="col-4">
                     <div class="card mb-4 rounded-3 shadow-sm ">
                         <div class="card-header py-3 ">
-                            <h4 class=card-title">{{ object.topic_letter }}</h4>
+                            <h4 class=card-title">Полное имя -{{ object.full_name }}</h4>
                         </div>
                         <div class="card-body text-lg-start">
-                            <h6 class="card-text ">{{ object.body_letter|slice:":160" }}</h6>
+                            <h6 class="card-text ">Эл. почта {{ object.email }}</h6>
+                            <h6 class="card-text ">Пол - {{ object.gender }}</h6>
+                            <h6 class="card-text ">Возраст - {{ object.age }}</h6>
                             <ul class="list-styled mt-4 mb-3">
-                                {% for cln in client_list %}
-                                    <div class="text-lg-start mb-2">
-                                        {{ cln }}
-                                    </div>
-                                {% endfor %}
-                                <h5>----</h5>
-                                <div class="text-lg-start mb-3">
-                                    <li>Настройка - {{ object.tining }}</li>
-                                </div>
-                                <div class="text-lg-start mb-2">
-                                    <li>Лог - {{ object.logic }}</li>
-                                </div>
+{#                                <div class="text-lg-start mb-3">#}
+{#                                    <li>Настройка - {{ object.tining }}</li>#}
+{#                                </div>#}
+{#                                <div class="text-lg-start mb-2">#}
+{#                                    <li>Лог - {{ object.logic }}</li>#}
+{#                                </div>#}
                             </ul>
                             <a type="button" class="w-100 btn btn-lg btn-bd-primary mb-3"
-                               href="{% url 'posting:letter_update_form/' object.pk %}">Изменить</a>
+                               href="{% url 'clients:clients_update_form/' object.pk %}">Изменить</a>
                             <a type="button" class="w-100 btn btn-lg btn-outline-danger mb-2"
-                               href="{% url 'posting:letter_confirm_delete/' object.pk %}">Удалить</a>
+                               href="{% url 'clients:clients_confirm_delete/' object.pk %}">Удалить</a>
                         </div>
                     </div>
                 </div>

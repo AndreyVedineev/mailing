@@ -80,7 +80,7 @@ class Letter(models.Model):
 
     def __str__(self):
         # Строковое отображение объекта
-        return f'{self.topic_letter} {self.body_letter}'
+        return f'{self.topic_letter} {self.body_letter}, {self.clients}'
 
     class Meta:
         verbose_name = 'Письмо'  # Настройка для наименования одного объекта

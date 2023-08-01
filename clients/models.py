@@ -11,17 +11,14 @@ class Client(models.Model):
         (FEMALE, 'Женщина')
     ]
 
-    email = models.EmailField.unique
+    email = models.EmailField(unique=True, verbose_name='Почта')
     full_name = models.CharField(max_length=150, **NULLABLE, verbose_name='Полное имя')
     comment = models.TextField(max_length=500, **NULLABLE, verbose_name='Комментарии')
     gender = models.CharField(max_length=1, choices=genders, default=MALE, **NULLABLE, verbose_name='Пол')
     age = models.IntegerField(**NULLABLE)
 
     def __str__(self):
-        if self.gender == self.MALE:
-            return f'Клиент - {self.full_name}'
-        else:
-            return f'Клиентка - {self.full_name}'
+        return f'{self.full_name}'
 
     class Meta:
         verbose_name = 'Клиент'  # Настройка для наименования одного объекта
