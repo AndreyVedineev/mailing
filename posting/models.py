@@ -3,11 +3,25 @@ from django.db import models
 NULLABLE = {'blank': True, 'null': True}
 
 
+class MailingLog(models.Model):
+    STATUS_OK = 'ok'
+    STATUS_FAILED = 'failed'
+    STATUSES = [(STATUS_OK, 'Успешно'),
+                (STATUS_FAILED, 'Ошибка')
+    ]
+
+
 class Logic(models.Model):
+    STATUS_OK = 'ok'
+    STATUS_FAILED = 'failed'
+    STATUSES = [(STATUS_OK, 'Успешно'),
+                (STATUS_FAILED, 'Ошибка')
+    ]
+
     data_time_last = models.DateTimeField(auto_now=False,
                                           auto_now_add=False,
                                           verbose_name='Дата и время последней попытки')
-    status_attempts = models.CharField(max_length=20, verbose_name='Статус попытки')
+    status_attempts = models.CharField(max_length=20, choices=STATUSES, verbose_name='Статус попытки')
     answer_srv_mail = models.IntegerField(**NULLABLE, verbose_name='Ответ почтового сервера')
 
     def __str__(self):
@@ -20,20 +34,27 @@ class Logic(models.Model):
 
 
 class Posting_tuning(models.Model):
-    DAY = '1'
-    WEEK = '2'
-    MONTH = '3'
-    periods = [
-        (DAY, 'раз в день'),
-        (WEEK, 'раз в неделю'),
-        (MONTH, 'раз в месяц')
-    ]
+    PERIOD_DAILY = 'daily'
+    PERIOD_WEEKLY = 'weekly'
+    PERIOD_MONTHLY = 'monthly'
+
+    PERIODS = [(PERIOD_DAILY, 'Ежедневная'),
+               (PERIOD_WEEKLY, 'Раз в неделю'),
+               (PERIOD_MONTHLY, 'Раз в месяц'), ]
+
+    STATUS_CREATED = 'created'
+    STATUS_STARTED = 'started'
+    STATUS_DONE = 'done'
+
+    STATUSES = [
+        (STATUS_STARTED, 'Запущена'),
+        (STATUS_CREATED, 'Создана'),
+        (STATUS_DONE, 'Завершена')]
 
     data_start = models.DateTimeField(auto_now=False, auto_now_add=False,
                                       verbose_name='Дата и время рассылки')
-    period = models.CharField(max_length=20, choices=periods, default=DAY, verbose_name='Период рассылки')
-    # period = models.TextField(verbose_name='Период рассылки')
-    status = models.TextField(max_length=15, **NULLABLE, verbose_name='Статус рассылки')
+    period = models.CharField(max_length=20, choices=PERIODS, default=PERIOD_DAILY, verbose_name='Период рассылки')
+    status = models.TextField(max_length=15, choices=STATUSES, **NULLABLE, verbose_name='Статус рассылки')
 
     def __str__(self):
         # Строковое отображение объекта
@@ -43,32 +64,6 @@ class Posting_tuning(models.Model):
         verbose_name = 'Настройка'  # Настройка для наименования одного объекта
         verbose_name_plural = 'Настройки'  # Настройка для наименования набора объектов
         ordering = ['data_start']
-
-
-# class Client(models.Model):
-#     MALE = 'M'
-#     FEMALE = 'F'
-#     genders = [
-#         (MALE, 'Мужчина'),
-#         (FEMALE, 'Женщина')
-#     ]
-#
-#     email = models.EmailField(unique=True, verbose_name='Почта' )
-#     full_name = models.CharField(max_length=150, **NULLABLE, verbose_name='Полное имя')
-#     comment = models.TextField(max_length=500, **NULLABLE, verbose_name='Комментарии')
-#     gender = models.CharField(max_length=1, choices=genders, default=MALE, **NULLABLE, verbose_name='Пол')
-#     age = models.IntegerField(**NULLABLE)
-#
-#     def __str__(self):
-#         if self.gender == self.MALE:
-#             return f'Клиент - {self.full_name}'
-#         else:
-#             return f'Клиентка - {self.full_name}'
-#
-#     class Meta:
-#         verbose_name = 'Клиент'  # Настройка для наименования одного объекта
-#         verbose_name_plural = 'Клиенты'  # Настройка для наименования набора объектов
-#         ordering = ['full_name']
 
 
 class Letter(models.Model):
@@ -86,5 +81,3 @@ class Letter(models.Model):
         verbose_name = 'Письмо'  # Настройка для наименования одного объекта
         verbose_name_plural = 'Письма'  # Настройка для наименования набора объектов
         ordering = ['topic_letter']
-
-

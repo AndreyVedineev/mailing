@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'posting',
     'clients',
 
-
 ]
 
 MIDDLEWARE = [
@@ -132,7 +131,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
 # CRONJOBS = [
 #  ('*/5 * * * *', ' мое приложение.cron.my_scheduled_job')
 # ]
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 2525
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+EMAIL_HOST_USER = 'avedineev69@bk.ru'
+EMAIL_HOST_PASSWORD = 'EkaB4gavrRaAyKEuWW2x'
+
+

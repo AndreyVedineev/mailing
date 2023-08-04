@@ -175,9 +175,10 @@
             <span class="fs-4">CRONTAB - классический монстр рассылок</span>
 
             <nav class="d-inline-flex mt-2 mt-md-1 ms-md-auto">
-                <a class="p-2 me-3 btn btn-btn btn-secondary" href={% url 'clients:clients_list' %}>Клиенты</a>
+                <a class="p-2 me-3 btn btn-btn btn-bd-primary" href={% url 'clients:clients_list' %}>Клиенты</a>
+                <a class="p-2 me-3 btn btn-btn btn-bd-primary" href={% url 'clients:clients_create/' %}>Новый клиент</a>
                 <a class="p-2 me-3 btn btn-btn btn-bd-primary" href="{% url 'posting:letter_list' %}">Рассылки</a>
-                <a class="p-2 me-3 btn btn-btn btn-bd-primary" href="{% url 'posting:letter_create/' %}">Создание рассылки</a>
+                <a class="p-2 me-3 btn btn-btn btn-bd-primary" href="{% url 'posting:letter_create/' %}">Новая рассылка</a>
                 <a class="p-2 me-3 btn btn-btn btn-secondary" href="#">Настройки рассылки</a>
                 <a class="p-2 me-3 btn btn-btn btn-secondary" href="#">Логи</a>
             </nav>
